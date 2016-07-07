@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-PT" prefix="og: http://ogp.me/ns#">
 <head>
-	<title><?php bloginfo( 'name' ) ?></title>
 	<?php wp_head() ?>
 </head>
 <body id="error-page">

@@ -4,15 +4,45 @@ namespace mowta\SiteProtect;
 use mowta\SiteProtect\PostTypes\Password as CPTPassword;
 use mowta\SiteProtect\Models\Password as Password;
 
+/**
+ * Class SiteProtect
+ *
+ * Main controller class for the WP Site Protect plugin.
+ * Initializes all the actions, filters, custom post types and others.
+ *
+ * @package mowta\SiteProtect
+ */
 class SiteProtect {
 
+	private $is_wp_authenticated = false;
+
+
+	/**
+	 * Returns the singleton instance of SiteProtect
+	 *
+	 * @return SiteProtect
+	 */
 	private static $instance = null;
 
-	private function __construct( ) {
-		
+	public static function getInstance() {
+		if(null === static::$instance) {
+			static::$instance = new static(); //late static binding (since PHP 5.3.0)
+			static::$instance->initialize();
+		}
+		return static::$instance;
+	}
+
+	//prevent cloning/duplicates
+	private function __clone(){}
+	private function __wakeup(){}
+	private function __construct( ) {}
+
+	private function initialize( ) {
 		$this->initialize_post_types();
 
 		$this->initialize_admin_interfaces();
+
+		add_action( 'init', array( $this, 'setup_current_user' ) );
 
 		add_action( 'template_redirect', array( $this, 'redirect_unauthorized') );
 		add_filter( 'template_include', array( $this, 'show_authentication_page') );
@@ -24,8 +54,23 @@ class SiteProtect {
 		add_action( 'wp_ajax_nopriv_wpsp_authorize', array( $this, 'ajax_authorize' ) );
 		add_action( 'wp_ajax_nopriv_wpsp_reset', array( $this, 'ajax_reset_password' ) );
 
+		add_action( 'wp_ajax_wpsp_authorize', array( $this, 'ajax_authorize' ) );
+		add_action( 'wp_ajax_wpsp_reset', array( $this, 'ajax_reset_password' ) );
+
 		add_action( 'admin_notices', array( $this, 'admin_notices') );
 
+	}
+
+	/**
+	 * This callback must run on the init hook because of some misbehaves with is_user_logged_in and
+	 *  wp_get_current_user.
+	 *
+	 * This is an attempt to fix bad login detections.
+	 *
+	 * @action init
+	 */
+	public function setup_current_user() {
+		$this->is_wp_authenticated = is_user_logged_in();
 	}
 
 	/**
@@ -39,12 +84,10 @@ class SiteProtect {
 		return get_option( 'wpsp_enabled' ) == 'yes';
 	}
 
-	public static function getInstance( ) {
-		if( static::$instance == null ) {
-			static::$instance = new SiteProtect();
-		}
-		return static::$instance;
+	public function get_password_strength() {
+		return get_option( 'wpsp_password_strength' ) ? get_option( 'wpsp_password_strength' ) : 'strong';
 	}
+
 
 	private function initialize_post_types( ) {
 		// Initialize the password CPT
@@ -149,8 +192,8 @@ class SiteProtect {
 	}
 
 	public function ajax_authorize() {
-
-		if( ! wp_verify_nonce( $_POST['_wpnonce'], 'authenticate' ) ) {
+		
+		if( ! check_ajax_referer( 'authenticate' ) ) {
 			wp_die('Invalid nonce.');
 		}
 
@@ -187,7 +230,7 @@ class SiteProtect {
 
 	public function ajax_reset_password() {
 
-		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'reset' ) ) {
+		if ( ! check_ajax_referer( 'reset' ) ) {
 			wp_die('Invalid nonce.');
 		}
 
@@ -217,7 +260,7 @@ class SiteProtect {
 
 	public function is_authorized( ) {
 		// A WordPress authenticated user is authorized to see the content.
-		if ( is_user_logged_in() ) {
+		if ( $this->is_wp_authenticated ) {
 			return true;
 		}
 

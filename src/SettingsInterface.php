@@ -7,10 +7,15 @@ use Carbon_Fields\Field;
 
 class SettingsInterface {
 
+	/**
+	 * @var SiteProtect
+	 */
+	private $sp;
+
 	public function __construct() {
+		$this->sp = SiteProtect::getInstance();
 
 		$this->initialize();
-
 	}
 
 	public function initialize() {
@@ -31,7 +36,7 @@ class SettingsInterface {
 						'medium' => 'Medium',
 						'strong' => 'Strong',
 					))
-					->set_default_value( "strong" )
+					->set_default_value( $this->sp->get_password_strength() )
 					->help_text( __( "Minimum password strength for users. Pick disable if you want to allow any password.", 'wp-site-protect' ) ),
 
 
@@ -42,8 +47,9 @@ class SettingsInterface {
 			))
 			->add_tab(__('Appearance', 'wp-site-protect'), array(
 				Field::make("rich_text", "crb_sidenote", "Sidenote Content")
-				
+
 			));
+
 	}
 
 

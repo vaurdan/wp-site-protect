@@ -13,7 +13,7 @@
 
 			var nonce = form.find("input[name='_wpnonce']").val();
 			var password = form.find("input[name='wpsp_password']").val();
-
+			
 			$.post(
 				ajax.ajax_url,
 				{
