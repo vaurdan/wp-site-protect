@@ -1,0 +1,19 @@
+{
+    "name": "mowta/wp-site-protect",
+    "description": "Protect your WordPress site with unique passwords",
+    "license": "gpl",
+    "authors": [
+        {
+            "name": "Henrique Mouta",
+            "email": "henrique@mowta.pt"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {
+        "htmlburger/carbon-fields": "^1.2"
+    },
+    "autoload": {
+         "psr-4": {"mowta\\SiteProtect\\": "src/"}
+    }
+
+}
