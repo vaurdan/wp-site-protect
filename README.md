@@ -17,13 +17,13 @@ This plugin is stable, but it's still under development. If you find any issues,
 2. Activation can be made in 'Plugins' menu
 3. Configure and create your passwords on the Site Passwords admin section.
 
-## Frequently Asked Questions ==
+## Frequently Asked Questions
 
-### How can I customize the CSS? =
+### How can I customize the CSS?
 
 Easy! You can use your theme's CSS as WP Site Protect pages uses the enqueued script/styles. If you need, you can remove the default WP Site Protect css by dequeueing the `wpsp_protect` css.
 
-### How can I customize the password required template? =
+### How can I customize the password required template?
 
 You can either just edit the text on the plugin settings, or completely rewrite the template. You have two different templates that you can drop on your theme's root:
 
