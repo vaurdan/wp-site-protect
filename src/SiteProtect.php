@@ -114,6 +114,10 @@ class SiteProtect {
 				'password-strength-meter',
 				'jquery.cookie'
 			) );
+			wp_localize_script( 'wpsp_reset', 'passwords', array(
+				'strength'  => WPSPSettings::get_password_strength(),
+				'blacklist' => wp_json_encode( WPSPSettings::get_blacklist() ),
+			) );
 		}
 
 		wp_localize_script( 'wpsp_auth', 'ajax',
