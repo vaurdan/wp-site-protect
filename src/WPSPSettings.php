@@ -28,6 +28,21 @@ class WPSPSettings {
 	}
 
 	/**
+	 * Returns the minimum password strength for a valid password.
+	 *
+	 * @return string
+	 */
+	public static function get_password_size() {
+		$size = get_option( self::$prefix . 'password_size' );
+
+		if( ! $size || ! is_int( $size ) ) {
+			return 6;
+		}
+
+		return $size;
+	}
+
+	/**
 	 * @param bool $raw return the raw information
 	 *
 	 * @return array|string
@@ -42,6 +57,9 @@ class WPSPSettings {
 			$blacklist = "password\nqwerty\nwordpress\n123456";
 		}
 
+		// Remove \r from the blacklist string
+		$blacklist = str_replace( "\r", "", $blacklist );
+
 		return explode("\n", $blacklist);
 
 	}
@@ -52,6 +70,7 @@ class WPSPSettings {
 			return __( '<h2>Access Restricted</h2>', 'wp-site-protect') .
 				__( '<p>You need to insert your password in order to continue.</p>', 'wp-site-protect' );
 		}
+		return $content;
 	}
 
 	public static function get_reset_content( ) {
@@ -60,6 +79,8 @@ class WPSPSettings {
 			return __( '<h2>Reset password</h2>', 'wp-site-protect') .
 			       __( '<p>Before you continue, you must reset the password to something different. Please use a good strong password.</p>', 'wp-site-protect' );
 		}
+		return $content;
+
 	}
 
 }

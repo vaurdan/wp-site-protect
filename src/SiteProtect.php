@@ -84,7 +84,7 @@ class SiteProtect {
 
 	public function enqueue_styles() {
 		// Only need to show styles if it's the unauthorized page
-		if( $this->is_authorized( ) ) {
+		if( $this->is_authorized( ) === true ) {
 			return;
 		}
 
@@ -101,7 +101,7 @@ class SiteProtect {
 
 	public function enqueue_scripts() {
 		// Only need to enqueue scripts if it's the unauthorized page
-		if( $this->is_authorized( ) ) {
+		if( $this->is_authorized( ) === true ) {
 			return;
 		}
 		wp_enqueue_script( 'password-strength-meter' );
@@ -116,7 +116,8 @@ class SiteProtect {
 			) );
 			wp_localize_script( 'wpsp_reset', 'passwords', array(
 				'strength'  => WPSPSettings::get_password_strength(),
-				'blacklist' => wp_json_encode( WPSPSettings::get_blacklist() ),
+				'blacklist' => WPSPSettings::get_blacklist(),
+				'different_password_error' => __( 'The passwords don\'t match.', 'wp-site-protect' ),
 			) );
 		}
 
@@ -135,7 +136,7 @@ class SiteProtect {
 		}
 
 		// Redirect all the requests to home if user isn't authorized
-		if ( ! $this->is_authorized() ) {
+		if ( $this->is_authorized() !== true ) {
 			wp_safe_redirect( home_url( "/" ) );
 			exit();
 		}
@@ -143,7 +144,7 @@ class SiteProtect {
 
 	public function show_authentication_page( $template ) {
 
-		if( $this->is_authorized() ) {
+		if( $this->is_authorized() === true ) {
 			return $template;
 		}
 
@@ -231,8 +232,9 @@ class SiteProtect {
 			wp_die();
 		}
 
-		if ( empty( $password ) || strlen( $password ) < 6 ) {
-			echo wp_json_encode( array( 'error' => __('Password must have at least 6 characters.', 'wp-site-protect') ) );
+		if ( empty( $password ) || strlen( $password ) < WPSPSettings::get_password_size() ) {
+			echo wp_json_encode( array( 'error' => sprintf( __('Password must have at least %s characters.', 'wp-site-protect'),
+				WPSPSettings::get_password_size() ) ) );
 			wp_die();
 		}
 
@@ -246,6 +248,11 @@ class SiteProtect {
 
 	}
 
+	/**
+	 * Returns false if user is not authorized. Returns true if it's authorized and 2 if needs to change password
+	 *
+	 * @return bool|int
+	 */
 	public function is_authorized( ) {
 		// A WordPress authenticated user is authorized to see the content.
 		if ( $this->is_wp_authenticated ) {
@@ -256,8 +263,11 @@ class SiteProtect {
 			// Let's validate the password
 			$hashed = Password::get_by_hash( sanitize_text_field( $_COOKIE['wpsp_secret'] ) );
 
-			if ( $hashed )
+			if ( $hashed && ! $hashed->need_regeneration() ) {
 				return true;
+			} else if ( $hashed && $hashed->need_regeneration() ) {
+				return 2;
+			}
 		}
 
 		return false;
@@ -338,7 +348,7 @@ class SiteProtect {
 				<label for="password_retyped">Repeat Password</label>
 				<input type="password" class="input-box" name="wpsp_password_retyped" id="password_retyped" style="background-image: none; background-position: 0% 0%; background-repeat: repeat;">
 				<span style="display: none" id="password-strength"></span>
-				<input type="submit" class="submit-button" disabled name="submitform" id="submitpasswordform" value="<?php esc_attr_e('Reset Password'); ?>">
+				<input type="submit" class="submit-button" name="submitform" id="submitpasswordform" value="<?php esc_attr_e('Reset Password'); ?>">
 			</div>
 		</form>
 

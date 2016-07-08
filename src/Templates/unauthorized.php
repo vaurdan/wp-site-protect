@@ -8,7 +8,7 @@
 <h1><?php bloginfo( 'name' ) ?></h1>
 
 <?php
-	echo wp_kses_post( \mowta\SiteProtect\WPSPSettings::get_password_content() );
+echo "<p>". wp_kses_post( \mowta\SiteProtect\WPSPSettings::get_password_content() ) . "</p>";
 
 	use mowta\SiteProtect\SiteProtect as SiteProtect;
 	SiteProtect::authenticate_form();

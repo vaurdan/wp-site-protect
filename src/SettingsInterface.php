@@ -26,13 +26,16 @@ class SettingsInterface {
 				Field::make('select', 'wpsp_password_strength', __( 'Minimum Password Strength','wp-site-protect' ) )
 					->add_options( array(
 						'disabled' => 'Disabled',
-						'weak'  => 'Weak',
-						'medium' => 'Medium',
-						'strong' => 'Strong',
+						'2'  => 'Weak',
+						'3' => 'Medium',
+						'4' => 'Strong',
 					))
 					->set_default_value( WPSPSettings::get_password_strength() )
 					->help_text( __( "Minimum password strength for users. Pick disable if you want to allow any password.", 'wp-site-protect' ) ),
-
+				// Password Size
+				Field::make('text', 'wpsp_password_size', __( 'Minimum Password Size','wp-site-protect' ) )
+				     ->set_default_value( WPSPSettings::get_password_size() )
+				     ->help_text( __( "Minimum password size allowed for users resets. Use a integer.", 'wp-site-protect' ) ),
 				// Password blacklist
 				Field::make('textarea', 'wpsp_blacklist', __('Passwords Blacklist','wp-site-protect' ) )
 					->set_rows(5)
