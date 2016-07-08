@@ -15,6 +15,11 @@ class WPSPSettings {
 	 * @return bool
 	 */
 	public static function enabled() {
+		// default value
+		if( get_option( self::$prefix . 'enabled') === false ) {
+			return true;
+		}
+
 		return get_option( self::$prefix . 'enabled' ) == 'yes';
 	}
 
@@ -72,6 +77,11 @@ class WPSPSettings {
 	 * @return bool
 	 */
 	public static function display_title() {
+		// default value
+		if( get_option( self::$prefix . 'display_title' ) === false ) {
+			return true;
+		}
+
 		return get_option( self::$prefix . 'display_title' ) == 'yes';
 	}
 
