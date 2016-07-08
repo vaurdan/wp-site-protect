@@ -32,7 +32,7 @@ You can either just edit the text on the plugin settings, or completely rewrite 
 
 You can customize them however you like, but you have to be careful about the forms. If you want, you can use the helper functions `wpsp_auth_form()` and `wpsp_reset_password_form()` that will output the correct form. If you want to make your own form, just make sure you keep the same form name and input names.
 
-### Screenshots
+## Screenshots
 
 ![Alt text](/screenshot-1.png?raw=true "Password creation page")
 1. Password creation page
