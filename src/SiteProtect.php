@@ -15,8 +15,7 @@ use mowta\SiteProtect\Models\Password as Password;
 class SiteProtect {
 
 	private $is_wp_authenticated = false;
-
-
+	
 	/**
 	 * Returns the singleton instance of SiteProtect
 	 *
@@ -71,21 +70,6 @@ class SiteProtect {
 	 */
 	public function setup_current_user() {
 		$this->is_wp_authenticated = is_user_logged_in();
-	}
-
-	/**
-	 * Returns true if WP Site Protect is globally enabled.
-	 *
-	 * If the option isn't set, it will always return true.
-	 *
-	 * @return bool
-	 */
-	public function enabled() {
-		return get_option( 'wpsp_enabled' ) == 'yes';
-	}
-
-	public function get_password_strength() {
-		return get_option( 'wpsp_password_strength' ) ? get_option( 'wpsp_password_strength' ) : 'strong';
 	}
 
 
@@ -278,7 +262,7 @@ class SiteProtect {
 	function admin_notices() {
 
 		// Bail if plugin is enabled or is not in any of our pages
-		if( $this->enabled() || get_current_screen()->post_type != 'password' ) {
+		if( WPSPSettings::enabled() || get_current_screen()->post_type != 'password' ) {
 			return;
 		}
 

@@ -7,14 +7,7 @@ use Carbon_Fields\Field;
 
 class SettingsInterface {
 
-	/**
-	 * @var SiteProtect
-	 */
-	private $sp;
-
 	public function __construct() {
-		$this->sp = SiteProtect::getInstance();
-
 		$this->initialize();
 	}
 
@@ -23,6 +16,7 @@ class SettingsInterface {
 		// Default options page
 		Container::make('theme_options', __('Settings', 'wp-site-protect') )
 			->set_page_parent('edit.php?post_type=password')
+			->set_page_permissions( 'manage_options' )
 			->add_tab(__('General', 'wp-site-protect'), array(
 				// Enable/Disable WPSP
 				Field::make('checkbox', 'wpsp_enabled', __( 'Enable WP Site Protect','wp-site-protect' ) )
@@ -36,17 +30,27 @@ class SettingsInterface {
 						'medium' => 'Medium',
 						'strong' => 'Strong',
 					))
-					->set_default_value( $this->sp->get_password_strength() )
+					->set_default_value( WPSPSettings::get_password_strength() )
 					->help_text( __( "Minimum password strength for users. Pick disable if you want to allow any password.", 'wp-site-protect' ) ),
 
-
+				// Password blacklist
 				Field::make('textarea', 'wpsp_blacklist', __('Passwords Blacklist','wp-site-protect' ) )
 					->set_rows(5)
-					->set_default_value( "password\nqwerty\nwordpress\n123456" )
+					->set_default_value( WPSPSettings::get_blacklist(true) )
 					->help_text( __( "Passwords that should be banned from picking. One per line.", 'wp-site-protect' ) ),
 			))
 			->add_tab(__('Appearance', 'wp-site-protect'), array(
-				Field::make("rich_text", "crb_sidenote", "Sidenote Content")
+				// Password Content
+				Field::make("rich_text", "wpsp_password_content", "Password Page Content")
+					->set_rows(10)
+					->set_default_value( WPSPSettings::get_password_content() )
+					->help_text( __('Use this editor to change the text that appears on the password request page.' , 'wp-site-protect') ),
+
+				// Reset Content
+				Field::make("rich_text", "wpsp_reset_content", "Reset Page Content")
+				     ->set_rows(10)
+				     ->set_default_value( WPSPSettings::get_reset_content() )
+				     ->help_text( __('Use this editor to change the text that appears on the password reset page.' , 'wp-site-protect') ),
 
 			));
 
