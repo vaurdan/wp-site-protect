@@ -12,8 +12,7 @@
 <?php
 	echo "<p>". wp_kses_post( \mowta\SiteProtect\WPSPSettings::get_reset_content() ) . "</p>";
 
-	use mowta\SiteProtect\SiteProtect as SiteProtect;
-	SiteProtect::reset_password_form();
+	wpsp_reset_password_form();
 ?>
 
 </body>
