@@ -42,19 +42,24 @@ class SiteProtect {
 		$this->initialize_admin_interfaces();
 
 		add_action( 'init', array( $this, 'setup_current_user' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_locale' ) );
 
-		add_action( 'template_redirect', array( $this, 'redirect_unauthorized') );
-		add_filter( 'template_include', array( $this, 'show_authentication_page') );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles') );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 20 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 20 );
+		// Only run the following filters if WP Site Protect is enabled
+		if ( WPSPSettings::enabled() ) {
+			add_action( 'template_redirect', array( $this, 'redirect_unauthorized' ) );
+			add_filter( 'template_include', array( $this, 'show_authentication_page' ) );
 
-		add_action( 'wp_ajax_nopriv_wpsp_authorize', array( $this, 'ajax_authorize' ) );
-		add_action( 'wp_ajax_nopriv_wpsp_reset', array( $this, 'ajax_reset_password' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 20 );
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 20 );
 
-		add_action( 'wp_ajax_wpsp_authorize', array( $this, 'ajax_authorize' ) );
-		add_action( 'wp_ajax_wpsp_reset', array( $this, 'ajax_reset_password' ) );
+			add_action( 'wp_ajax_nopriv_wpsp_authorize', array( $this, 'ajax_authorize' ) );
+			add_action( 'wp_ajax_nopriv_wpsp_reset', array( $this, 'ajax_reset_password' ) );
+
+			add_action( 'wp_ajax_wpsp_authorize', array( $this, 'ajax_authorize' ) );
+			add_action( 'wp_ajax_wpsp_reset', array( $this, 'ajax_reset_password' ) );
+		}
 
 		add_action( 'admin_notices', array( $this, 'admin_notices') );
 
@@ -72,6 +77,10 @@ class SiteProtect {
 		$this->is_wp_authenticated = is_user_logged_in();
 	}
 
+	public function load_locale() {
+		$langs_dir = plugin_basename( dirname( dirname( __FILE__ ) ) ) . "/languages";
+		load_plugin_textdomain( 'wp-site-protect', false, $langs_dir );
+	}
 
 	private function initialize_post_types( ) {
 		// Initialize the password CPT
@@ -279,7 +288,6 @@ class SiteProtect {
 	}
 
 	function admin_notices() {
-
 		// Bail if plugin is enabled or is not in any of our pages
 		if( WPSPSettings::enabled() || get_current_screen()->post_type != 'password' ) {
 			return;

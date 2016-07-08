@@ -8,8 +8,9 @@ use Carbon_Fields\Field;
 class SettingsInterface {
 
 	public function __construct() {
-		$this->initialize();
+		add_action( 'init', array( $this, 'initialize' ) );
 	}
+
 
 	public function initialize() {
 
@@ -23,7 +24,7 @@ class SettingsInterface {
 					->set_default_value( WPSPSettings::enabled() ? 'yes' : '' )
 					->help_text( __( "Uncheck this if you want to disable WP Site Protect functionality", 'wp-site-protect' ) ),
 				// Password Strength
-				Field::make('select', 'wpsp_password_strength', __( 'Minimum Password Strength','wp-site-protect' ) )
+				Field::make('select', 'wpsp_password_strength', __( 'Minimum Password Strength', 'wp-site-protect' ) )
 					->add_options( array(
 						'disabled' => 'Disabled',
 						'2'  => 'Weak',
