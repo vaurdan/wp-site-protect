@@ -126,7 +126,7 @@ function checkPasswordStrength( $pass1,
 	// The meter function returns a result even if pass2 is empty,
 	// enable only the submit button if the password is strong and
 	// both passwords are filled up
-	if ( strength > minimum_strength && '' !== pass2.trim() ) {
+	if ( strength >= minimum_strength && '' !== pass2.trim() ) {
 		$submitButton.removeAttr( 'disabled' );
 	}
 
