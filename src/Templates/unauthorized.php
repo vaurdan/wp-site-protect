@@ -5,7 +5,9 @@
 </head>
 <body id="error-page">
 
+<?php if( \mowta\SiteProtect\WPSPSettings::display_title() ): ?>
 <h1><?php bloginfo( 'name' ) ?></h1>
+<?php endif; ?>
 
 <?php
 echo "<p>". wp_kses_post( \mowta\SiteProtect\WPSPSettings::get_password_content() ) . "</p>";

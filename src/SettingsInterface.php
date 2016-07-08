@@ -20,7 +20,7 @@ class SettingsInterface {
 			->add_tab(__('General', 'wp-site-protect'), array(
 				// Enable/Disable WPSP
 				Field::make('checkbox', 'wpsp_enabled', __( 'Enable WP Site Protect','wp-site-protect' ) )
-					->set_default_value( 'yes' )
+					->set_default_value( WPSPSettings::enabled() ? 'yes' : '' )
 					->help_text( __( "Uncheck this if you want to disable WP Site Protect functionality", 'wp-site-protect' ) ),
 				// Password Strength
 				Field::make('select', 'wpsp_password_strength', __( 'Minimum Password Strength','wp-site-protect' ) )
@@ -43,6 +43,10 @@ class SettingsInterface {
 					->help_text( __( "Passwords that should be banned from picking. One per line.", 'wp-site-protect' ) ),
 			))
 			->add_tab(__('Appearance', 'wp-site-protect'), array(
+				// Enable/Disable Site Title
+				Field::make('checkbox', 'wpsp_display_title', sprintf( __( 'Display site title (%s) in page header','wp-site-protect' ), esc_html( get_bloginfo('name') ) ) )
+				     ->set_default_value( WPSPSettings::display_title() ? 'yes' : '' )
+				     ->help_text( __( "Uncheck this if you want to hide the website title on the password pages.", 'wp-site-protect' ) ),
 				// Password Content
 				Field::make("rich_text", "wpsp_password_content", "Password Page Content")
 					->set_rows(10)

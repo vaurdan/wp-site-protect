@@ -238,6 +238,11 @@ class SiteProtect {
 			wp_die();
 		}
 
+		if ( in_array( $password, WPSPSettings::get_blacklist() ) ) {
+			echo wp_json_encode( array( 'error' => __('This password is blacklisted. Please use another.', 'wp-site-protect') ) );
+			wp_die();
+		}
+
 		$old_password->change_password( $password );
 
 		// Log the authentication

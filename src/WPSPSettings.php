@@ -64,6 +64,17 @@ class WPSPSettings {
 
 	}
 
+	/**
+	 * Returns true if website title should be displayed.
+	 *
+	 * If the option isn't set, it will always return true.
+	 *
+	 * @return bool
+	 */
+	public static function display_title() {
+		return get_option( self::$prefix . 'display_title' ) == 'yes';
+	}
+
 	public static function get_password_content( ) {
 		$content = get_option( self::$prefix . 'password_content' );
 		if ( ! $content ) {

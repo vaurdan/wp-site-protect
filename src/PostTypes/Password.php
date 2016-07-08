@@ -26,31 +26,31 @@ class Password extends PostType {
 	
 	public function register() {
 		$labels = array(
-			'name'                  => _x( 'Passwords', 'Post Type General Name', 'wp_site_protect' ),
-			'singular_name'         => _x( 'Password', 'Post Type Singular Name', 'wp_site_protect' ),
-			'menu_name'             => __( 'Site Passwords', 'wp_site_protect' ),
-			'name_admin_bar'        => __( 'Site Passwords', 'wp_site_protect' ),
-			'archives'              => __( 'Password Archies', 'wp_site_protect' ),
-			'parent_item_colon'     => __( 'Parent Password', 'wp_site_protect' ),
-			'all_items'             => __( 'All Passwords', 'wp_site_protect' ),
-			'add_new_item'          => __( 'Add New Password', 'wp_site_protect' ),
-			'add_new'               => __( 'Add New', 'wp_site_protect' ),
-			'new_item'              => __( 'New Password', 'wp_site_protect' ),
-			'edit_item'             => __( 'Edit Password', 'wp_site_protect' ),
-			'update_item'           => __( 'Update Password', 'wp_site_protect' ),
-			'view_item'             => __( 'View Password', 'wp_site_protect' ),
-			'search_items'          => __( 'Search Password', 'wp_site_protect' ),
-			'not_found'             => __( 'Not found', 'wp_site_protect' ),
-			'not_found_in_trash'    => __( 'Not found in Trash', 'wp_site_protect' ),
-			'featured_image'        => __( 'Featured Image', 'wp_site_protect' ),
-			'set_featured_image'    => __( 'Set featured image', 'wp_site_protect' ),
-			'remove_featured_image' => __( 'Remove featured image', 'wp_site_protect' ),
-			'use_featured_image'    => __( 'Use as featured image', 'wp_site_protect' ),
-			'insert_into_item'      => __( 'Insert into passwords', 'wp_site_protect' ),
-			'uploaded_to_this_item' => __( 'Uploaded to this password', 'wp_site_protect' ),
-			'items_list'            => __( 'Passwords list', 'wp_site_protect' ),
-			'items_list_navigation' => __( 'Passwords list navigation', 'wp_site_protect' ),
-			'filter_items_list'     => __( 'Filter passwords list', 'wp_site_protect' ),
+			'name'                  => _x( 'Passwords', 'Post Type General Name', 'wp-site-protect' ),
+			'singular_name'         => _x( 'Password', 'Post Type Singular Name', 'wp-site-protect' ),
+			'menu_name'             => __( 'Site Passwords', 'wp-site-protect' ),
+			'name_admin_bar'        => __( 'Site Passwords', 'wp-site-protect' ),
+			'archives'              => __( 'Password Archies', 'wp-site-protect' ),
+			'parent_item_colon'     => __( 'Parent Password', 'wp-site-protect' ),
+			'all_items'             => __( 'All Passwords', 'wp-site-protect' ),
+			'add_new_item'          => __( 'Add New Password', 'wp-site-protect' ),
+			'add_new'               => __( 'Add New', 'wp-site-protect' ),
+			'new_item'              => __( 'New Password', 'wp-site-protect' ),
+			'edit_item'             => __( 'Edit Password', 'wp-site-protect' ),
+			'update_item'           => __( 'Update Password', 'wp-site-protect' ),
+			'view_item'             => __( 'View Password', 'wp-site-protect' ),
+			'search_items'          => __( 'Search Password', 'wp-site-protect' ),
+			'not_found'             => __( 'Not found', 'wp-site-protect' ),
+			'not_found_in_trash'    => __( 'Not found in Trash', 'wp-site-protect' ),
+			'featured_image'        => __( 'Featured Image', 'wp-site-protect' ),
+			'set_featured_image'    => __( 'Set featured image', 'wp-site-protect' ),
+			'remove_featured_image' => __( 'Remove featured image', 'wp-site-protect' ),
+			'use_featured_image'    => __( 'Use as featured image', 'wp-site-protect' ),
+			'insert_into_item'      => __( 'Insert into passwords', 'wp-site-protect' ),
+			'uploaded_to_this_item' => __( 'Uploaded to this password', 'wp-site-protect' ),
+			'items_list'            => __( 'Passwords list', 'wp-site-protect' ),
+			'items_list_navigation' => __( 'Passwords list navigation', 'wp-site-protect' ),
+			'filter_items_list'     => __( 'Filter passwords list', 'wp-site-protect' ),
 		);
 		$capabilities = array(
 			'edit_post'             => 'manage_options',
@@ -63,8 +63,8 @@ class Password extends PostType {
 			'read_private_posts'    => 'manage_options',
 		);
 		$args = array(
-			'label'                 => __( 'Password', 'wp_site_protect' ),
-			'description'           => __( 'Site Passwords', 'wp_site_protect' ),
+			'label'                 => __( 'Password', 'wp-site-protect' ),
+			'description'           => __( 'Site Passwords', 'wp-site-protect' ),
 			'labels'                => $labels,
 			'supports'              => array( 'revisions' ),
 			'hierarchical'          => false,
@@ -87,24 +87,24 @@ class Password extends PostType {
 	}
 
 	public function fields() {
-		Container::make('post_meta', __('Create Password', 'wp_site_protect') )
+		Container::make('post_meta', __('Create Password', 'wp-site-protect') )
 			->show_on_post_type('password')
 			->add_fields(array(
-				Field::make('text', '_password', __( 'Password', 'wp_site_protect' ))
+				Field::make('text', '_password', __( 'Password', 'wp-site-protect' ))
 					->set_default_value( wp_generate_password( 8 ) )
-					->help_text( __("By default, an autogenerated password will be filled.", 'wp_site_protect') ),
-				Field::make('checkbox', '_regenerate', __( 'Force a new password on first use', 'wp_site_protect' ))
+					->help_text( __("By default, an autogenerated password will be filled.", 'wp-site-protect') ),
+				Field::make('checkbox', '_regenerate', __( 'Force a new password on first use', 'wp-site-protect' ))
 					->set_default_value('yes')
-					->help_text( __("If you want this password to be temporary, check this.", 'wp_site_protect') ),
+					->help_text( __("If you want this password to be temporary, check this.", 'wp-site-protect') ),
 			));
 	}
 
 	public function password_columns( $defaults ) {
 		return array( 
 				'cb' => "<input type=\"checkbox\" />",
-				'password' => __('Password', 'wp_site_protect'),
-				'status' => __('Status', 'wp_site_protect'),
-				'last_used' => __('Last Login', 'wp_site_protect'),
+				'password' => __('Password', 'wp-site-protect'),
+				'status' => __('Status', 'wp-site-protect'),
+				'last_used' => __('Last Login', 'wp-site-protect'),
 			);
 	}
 
@@ -116,16 +116,16 @@ class Password extends PostType {
 				break;
 			case 'status':
 				if ( $password->used() ) {
-					echo sprintf( __('Password changed to <strong>%s</strong>', 'wp_site_protect'), $password->get_current_password() );
+					echo sprintf( __('Password changed to <strong>%s</strong>', 'wp-site-protect'), $password->get_current_password() );
 				} else {
-					echo __('Not being used.', 'wp_site_protect');
+					echo __('Not being used.', 'wp-site-protect');
 				}
 				break;
 			case 'last_used':
 				if ( $password->used() ) {
 					echo $password->get_meta('_last_time_used') . "<br/>(" . $password->get_meta('_last_time_ip') . ")";
 				} else {
-					echo __('Never logged in.', 'wp_site_protect');
+					echo __('Never logged in.', 'wp-site-protect');
 				}
 				break;
 		}
@@ -133,7 +133,7 @@ class Password extends PostType {
 
 	public function register_metabox() {
 		if ( $this->current_post_exists() ) {
-			add_meta_box( 'password-details', __( 'Password Details', 'wp_site_protect' ), array( $this, 'render_password_details_metabox' ), 'password' );
+			add_meta_box( 'password-details', __( 'Password Details', 'wp-site-protect' ), array( $this, 'render_password_details_metabox' ), 'password' );
 		}
 	}
 
@@ -144,7 +144,7 @@ class Password extends PostType {
 		<p><strong>Original Password:</strong> <?php echo $password->get_original_password() ?>
 		<p><strong>Password Hash:</strong> <?php echo $password->get_hashed_password() ?></p>
 		<?php if ( ! $password->used() ) :?>
-			<p><?php _e('This password was never been used.', 'wp_site_protect' ) ?></p>
+			<p><?php _e('This password was never been used.', 'wp-site-protect' ) ?></p>
 		<?php else: ?>
 			<p><strong>First time used: </strong>
 				<?php echo $password->get_meta('_first_time_used') ?> by <?php echo $password->get_meta('_first_time_ip') ?></p>
