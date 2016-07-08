@@ -26,10 +26,10 @@ class SettingsInterface {
 				// Password Strength
 				Field::make('select', 'wpsp_password_strength', __( 'Minimum Password Strength', 'wp-site-protect' ) )
 					->add_options( array(
-						'disabled' => 'Disabled',
-						'2'  => 'Weak',
-						'3' => 'Medium',
-						'4' => 'Strong',
+						'disabled' => __('Disabled', 'wp-site-protect'),
+						'2'  => __('Weak', 'wp-site-protect'),
+						'3' => __('Medium', 'wp-site-protect'),
+						'4' => __('Strong', 'wp-site-protect'),
 					))
 					->set_default_value( WPSPSettings::get_password_strength() )
 					->help_text( __( "Minimum password strength for users. Pick disable if you want to allow any password.", 'wp-site-protect' ) ),

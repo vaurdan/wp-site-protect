@@ -26,8 +26,8 @@ class Password extends PostType {
 	
 	public function register() {
 		$labels = array(
-			'name'                  => _x( 'Passwords', 'Post Type General Name', 'wp-site-protect' ),
-			'singular_name'         => _x( 'Password', 'Post Type Singular Name', 'wp-site-protect' ),
+			'name'                  => __( 'Passwords', 'wp-site-protect' ),
+			'singular_name'         => __( 'Password', 'wp-site-protect' ),
 			'menu_name'             => __( 'Site Passwords', 'wp-site-protect' ),
 			'name_admin_bar'        => __( 'Site Passwords', 'wp-site-protect' ),
 			'archives'              => __( 'Password Archies', 'wp-site-protect' ),
@@ -141,18 +141,18 @@ class Password extends PostType {
 		
 		$password = new SinglePassword( $post );
 		?>
-		<p><strong>Original Password:</strong> <?php echo $password->get_original_password() ?>
-		<p><strong>Password Hash:</strong> <?php echo $password->get_hashed_password() ?></p>
+		<p><strong><?php esc_html_e('Original Password:', 'wp-site-protect') ?></strong> <?php echo $password->get_original_password() ?>
+		<p><strong><?php esc_html_e('Password Hash:', 'wp-site-protect') ?></strong> <?php echo $password->get_hashed_password() ?></p>
 		<?php if ( ! $password->used() ) :?>
 			<p><?php _e('This password was never been used.', 'wp-site-protect' ) ?></p>
 		<?php else: ?>
-			<p><strong>First time used: </strong>
-				<?php echo $password->get_meta('_first_time_used') ?> by <?php echo $password->get_meta('_first_time_ip') ?></p>
-			<p><strong>Last time used: </strong>
-				<?php echo $password->get_meta('_last_time_used') ?> by <?php echo $password->get_meta('_last_time_ip') ?></p>
+			<p><strong><?php esc_html_e('First time used:', 'wp-site-protect') ?> </strong>
+				<?php echo $password->get_meta('_first_time_used') ?> (<?php echo $password->get_meta('_first_time_ip') ?>)</p>
+			<p><strong><?php esc_html_e('Last time used:', 'wp-site-protect') ?> </strong>
+				<?php echo $password->get_meta('_last_time_used') ?> (<?php echo $password->get_meta('_last_time_ip') ?>)</p>
 			<?php if( $password->get_meta('_changed_on') ): ?>
-			<p><strong>Changed on: </strong>
-				<?php echo $password->get_meta('_changed_on') ?> by <?php echo $password->get_meta('_changed_by') ?></p>
+			<p><strong><?php esc_html_e('Changed on:', 'wp-site-protect') ?> </strong>
+				<?php echo $password->get_meta('_changed_on') ?> (<?php echo $password->get_meta('_changed_by') ?>)</p>
 			<?php endif; ?>
 		<?php endif;
 

@@ -1,9 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Site Protect\n"
-"POT-Creation-Date: 2016-07-08 13:00+0100\n"
-"PO-Revision-Date: 2016-07-08 13:14+0100\n"
+"POT-Creation-Date: 2016-07-08 13:43+0100\n"
+"PO-Revision-Date: 2016-07-08 13:43+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,10 +15,17 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;esc_html_e;esc_attr_e;esc_url_e;esc_html__;"
 "esc_attr__;esc_html__\n"
-"Last-Translator: \n"
-"Language: pt\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: vendor\n"
+
+#: src/PostTypes/Password.php:29
+msgid "Passwords"
+msgstr "Senhas"
+
+#: src/PostTypes/Password.php:30 src/PostTypes/Password.php:66
+#: src/PostTypes/Password.php:93 src/PostTypes/Password.php:105
+msgid "Password"
+msgstr "Senha"
 
 #: src/PostTypes/Password.php:31 src/PostTypes/Password.php:32
 #: src/PostTypes/Password.php:67
@@ -107,11 +116,6 @@ msgstr "Navegação na lista de Senhas"
 msgid "Filter passwords list"
 msgstr "Filtrar lista de senhas"
 
-#: src/PostTypes/Password.php:66 src/PostTypes/Password.php:93
-#: src/PostTypes/Password.php:105
-msgid "Password"
-msgstr "Senha"
-
 #: src/PostTypes/Password.php:90
 msgid "Create Password"
 msgstr "Criar Senha"
@@ -153,32 +157,68 @@ msgstr "Nunca acedeu."
 msgid "Password Details"
 msgstr "Detalhes da Senha"
 
+#: src/PostTypes/Password.php:144
+msgid "Original Password:"
+msgstr "Senha Original:"
+
+#: src/PostTypes/Password.php:145
+msgid "Password Hash:"
+msgstr "Resumo da Senha:"
+
 #: src/PostTypes/Password.php:147
 msgid "This password was never been used."
 msgstr "Esta senha nunca foi utilizada."
 
-#: src/SettingsInterface.php:17
+#: src/PostTypes/Password.php:149
+msgid "First time used:"
+msgstr "Utilizada pela primeira vez:"
+
+#: src/PostTypes/Password.php:151
+msgid "Last time used:"
+msgstr "Utilizada pela última vez:"
+
+#: src/PostTypes/Password.php:154
+msgid "Changed on:"
+msgstr "Alterada em:"
+
+#: src/SettingsInterface.php:18
 msgid "Settings"
 msgstr "Definições"
 
-#: src/SettingsInterface.php:20
+#: src/SettingsInterface.php:21
 msgid "General"
 msgstr "Geral"
 
-#: src/SettingsInterface.php:22
+#: src/SettingsInterface.php:23
 msgid "Enable WP Site Protect"
 msgstr "Activar WP Site Protect"
 
-#: src/SettingsInterface.php:24
+#: src/SettingsInterface.php:25
 msgid "Uncheck this if you want to disable WP Site Protect functionality"
 msgstr ""
 "Desselecionar isto se pretende desactivar a funcionalidade do WP Site Protect"
 
-#: src/SettingsInterface.php:26
+#: src/SettingsInterface.php:27
 msgid "Minimum Password Strength"
 msgstr "Força mínima da Senha"
 
-#: src/SettingsInterface.php:34
+#: src/SettingsInterface.php:29
+msgid "Disabled"
+msgstr "Desactivado"
+
+#: src/SettingsInterface.php:30
+msgid "Weak"
+msgstr "Fraca"
+
+#: src/SettingsInterface.php:31
+msgid "Medium"
+msgstr "Média"
+
+#: src/SettingsInterface.php:32
+msgid "Strong"
+msgstr "Forte"
+
+#: src/SettingsInterface.php:35
 msgid ""
 "Minimum password strength for users. Pick disable if you want to allow any "
 "password."
@@ -186,84 +226,84 @@ msgstr ""
 "Força mínima da senha para os utilizadores. Selecione desactivado para "
 "permitir qualquer senha."
 
-#: src/SettingsInterface.php:36
+#: src/SettingsInterface.php:37
 msgid "Minimum Password Size"
 msgstr "Tamanho Mínimo da Senha"
 
-#: src/SettingsInterface.php:38
+#: src/SettingsInterface.php:39
 msgid "Minimum password size allowed for users resets. Use a integer."
 msgstr ""
 "Tamanho mínimo da senha permitido para os utilizadores. Utilizar um número "
 "inteiro."
 
-#: src/SettingsInterface.php:40
+#: src/SettingsInterface.php:41
 msgid "Passwords Blacklist"
 msgstr "Lista Negra de Senhas"
 
-#: src/SettingsInterface.php:43
+#: src/SettingsInterface.php:44
 msgid "Passwords that should be banned from picking. One per line."
 msgstr "Senhas que devem ser impedidas de selecionar. Uma por linha."
 
-#: src/SettingsInterface.php:45
+#: src/SettingsInterface.php:46
 msgid "Appearance"
 msgstr "Apresentação"
 
-#: src/SettingsInterface.php:47
+#: src/SettingsInterface.php:48
 #, php-format
 msgid "Display site title (%s) in page header"
 msgstr "Mostrar título do site (%s) no cabeçalho da página"
 
-#: src/SettingsInterface.php:49
+#: src/SettingsInterface.php:50
 msgid ""
 "Uncheck this if you want to hide the website title on the password pages."
 msgstr ""
 "Desselecionar isto se pretende esconder o título do site nas páginas das "
 "senhas."
 
-#: src/SettingsInterface.php:54
+#: src/SettingsInterface.php:55
 msgid ""
 "Use this editor to change the text that appears on the password request page."
 msgstr ""
 "Utilize este editor para alterar o texto que aparece na página da senha."
 
-#: src/SettingsInterface.php:60
+#: src/SettingsInterface.php:61
 msgid ""
 "Use this editor to change the text that appears on the password reset page."
 msgstr ""
 "Utilize este editor para alterar o texto que aparece na página de mudança de "
 "senha."
 
-#: src/SiteProtect.php:125
+#: src/SiteProtect.php:129
 msgid "The passwords don't match."
 msgstr "As senhas não são iguais."
 
-#: src/SiteProtect.php:198
+#: src/SiteProtect.php:202
 msgid "Too many attempts to login. Please try again in a minute"
 msgstr ""
 "Demasiadas tentativas de autenticação. Por favor, tente dentro de um minuto."
 
-#: src/SiteProtect.php:205
+#: src/SiteProtect.php:209
 msgid "Please insert a password"
 msgstr "Insira uma senha."
 
-#: src/SiteProtect.php:214
+#: src/SiteProtect.php:218
 msgid "Invalid password"
 msgstr "Senha inválida."
 
-#: src/SiteProtect.php:236
+#: src/SiteProtect.php:240
 msgid "Missing old password hash."
 msgstr "Falta o resumo da senha antiga."
 
-#: src/SiteProtect.php:241
+#: src/SiteProtect.php:245
 #, php-format
 msgid "Password must have at least %s characters."
 msgstr "A senha deve ter pelo menos %s caracteres."
 
-#: src/SiteProtect.php:247
+#: src/SiteProtect.php:251
 msgid "This password is blacklisted. Please use another."
 msgstr "Esta senha está na lista negra. Por favor, utilize outra."
 
-#: src/SiteProtect.php:295
+#: src/SiteProtect.php:298
 #, php-format
 msgid ""
 "WP Site Protect is disabled. You can enable it on <a href=\"%s\">Settings "
@@ -272,11 +312,11 @@ msgstr ""
 "WP Site Protect está desactivado. Poderá activa-lo na <a href=\"%s\">página "
 "de Definições</a>."
 
-#: src/SiteProtect.php:330
+#: src/SiteProtect.php:333
 msgid "Authenticate"
 msgstr "Autenticar"
 
-#: src/SiteProtect.php:361
+#: src/SiteProtect.php:364
 msgid "Reset Password"
 msgstr "Redefinir Senha"
 
