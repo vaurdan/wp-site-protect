@@ -4,7 +4,7 @@ Tags: site, password, protect, protection, multiple
 Donate link: http://mowta.pt
 Requires at least: 4.0
 Tested up to: 4.6
-Stable tag: trunk
+Stable tag: 1.0
 License: GPLv3
 
 Protect your WordPress website with unlimited unique traceable passwords.
