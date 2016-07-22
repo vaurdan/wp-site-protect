@@ -30,7 +30,7 @@ class Password extends PostType {
 			'singular_name'         => __( 'Password', 'wp-site-protect' ),
 			'menu_name'             => __( 'Site Passwords', 'wp-site-protect' ),
 			'name_admin_bar'        => __( 'Site Passwords', 'wp-site-protect' ),
-			'archives'              => __( 'Password Archies', 'wp-site-protect' ),
+			'archives'              => __( 'Password Archives', 'wp-site-protect' ),
 			'parent_item_colon'     => __( 'Parent Password', 'wp-site-protect' ),
 			'all_items'             => __( 'All Passwords', 'wp-site-protect' ),
 			'add_new_item'          => __( 'Add New Password', 'wp-site-protect' ),
