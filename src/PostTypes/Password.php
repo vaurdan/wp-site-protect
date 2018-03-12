@@ -112,11 +112,11 @@ class Password extends PostType {
 		$password = new SinglePassword( $post_id );
 		switch ( $column_name ) {
 			case 'password':
-				echo "<a class=\"row-title\" href='" . esc_url( get_edit_post_link( $post_id ) ) . "'>" . $password->get_original_password() . "</a>";
+				echo "<a class=\"row-title\" href='" . esc_url( get_edit_post_link( $post_id ) ) . "'>" . esc_html( $password->get_original_password() ) . "</a>";
 				break;
 			case 'status':
 				if ( $password->used() ) {
-					echo sprintf( __('Password changed to <strong>%s</strong>', 'wp-site-protect'), $password->get_current_password() );
+					echo sprintf( __('Password changed to <strong>%s</strong>', 'wp-site-protect'), esc_html( $password->get_current_password() ) );
 				} else {
 					echo __('Not being used.', 'wp-site-protect');
 				}
@@ -141,7 +141,7 @@ class Password extends PostType {
 		
 		$password = new SinglePassword( $post );
 		?>
-		<p><strong><?php esc_html_e('Original Password:', 'wp-site-protect') ?></strong> <?php echo $password->get_original_password() ?>
+		<p><strong><?php esc_html_e('Original Password:', 'wp-site-protect') ?></strong> <?php echo esc_html( $password->get_original_password() ) ?>
 		<p><strong><?php esc_html_e('Password Hash:', 'wp-site-protect') ?></strong> <?php echo $password->get_hashed_password() ?></p>
 		<?php if ( ! $password->used() ) :?>
 			<p><?php _e('This password was never been used.', 'wp-site-protect' ) ?></p>
