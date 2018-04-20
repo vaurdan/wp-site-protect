@@ -129,9 +129,9 @@ class Password extends PostType
         break;
       case 'description':
         if ($password->get_meta('_description')) {
-            echo $password->get_meta('_description');
+          echo esc_html($password->get_meta('_description'));
         } else {
-            echo __('No description available.', 'wp-site-protect');
+          echo __('No description available.', 'wp-site-protect');
         }
         break;
       case 'last_used':
